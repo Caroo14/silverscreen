@@ -1,0 +1,105 @@
+version: 2
+
+sources:
+  - name: SILVERSCREEN
+    description: 5 tables showing cost and revenue for cinema
+    database: SILVER_SCREEN
+    schema: Public
+    tables:
+      - name: invoices
+        description: monthly rental cost per movie id
+        columns:
+          - name: invoice_id
+      - name: movies
+        description: movie detail per movie id
+        columns:
+          - name: movie_id
+      - name: nj_001
+        description: transaction for cinema 1
+      - name: nj_002
+        description: transaction for cinama 2
+      - name: nj_003
+        description: transacion for cinema 3
+models:
+  - name: stg_movies
+    description: Staging table for movie details
+    columns:
+      - name: movie_id
+        description: Unique identifier for the movie
+      - name: movie_title
+        description: Title of the movie
+      - name: genre
+
+        description: Genre of the movie
+      - name: studio
+        description: Production studio of the movie
+
+  - name: stg_invoices
+    description: Staging table for invoices with rental_cost
+    columns:
+      - name: movie_id
+        description: Movie identifier
+      - name: month
+        description: Month of invoice (YYYY-MM-DD)
+      - name: location_id
+        description: Cinema location
+      - name: rental_cost
+        description: Monthly rental cost
+
+  - name: int_sales_monthly
+    description: Aggregated monthly sales for each movie and cinema
+    columns:
+      - name: movie_id
+        description: Movie identifier
+      - name: month
+        description: Month of transaction
+      - name: location
+        description: Cinema location
+      - name: tickets_sold
+        description: Total tickets sold
+      - name: revenue
+        description: Revenue from ticket sales
+
+  - name: int_cost_revenue_monthly
+    description: Combined intermediate table of rental cost and sales
+    columns:
+      - name: movie_id
+        description: Movie identifier
+      - name: month
+        description: Month of transaction
+      - name: location
+        description: Cinema location
+      - name: tickets_sold
+        description: Total tickets sold
+      - name: revenue
+        description: Revenue from ticket sales
+      - name: rental_cost
+        description: Rental cost for the movie at the cinema
+
+  - name: mart_cost_revenue_monthly
+    description: >
+      Final table that combines billing (rental_cost) and sales (revenue, tickets_sold) 
+      with movie details. Useful for monthly profitability analysis per cinema.
+    columns:
+      - name: movie_id
+        description: Unique identifier for the movie
+        tests:
+          - not_null
+      - name: movie_title
+        description: Title of the movie
+      - name: genre
+        description: Genre of the movie
+      - name: studio
+        description: Production studio of the movie
+      - name: month
+        description: Month of billing and sales (YYYY-MM-DD)
+        tests:
+          - not_null
+      - name: location
+        description: Cinema where the movie was shown
+      - name: rental_cost
+        description: Monthly rental cost of the movie at that cinema
+      - name: tickets_sold
+        description: Total tickets sold for the movie that month at that cinema
+      - name: revenue
+        description: Revenue generated from ticket sales
