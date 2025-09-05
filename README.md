@@ -4,7 +4,7 @@
 
 ## Project Overview and Objectives:
 
-I am a Business Analyst for a major Entertainment Company. Recently, the company acquired a small theater chain in New Jersey called Silver Screen, which operates only three locations.
+A major Entertainment Company,  acquired a small theater chain in New Jersey called Silver Screen, which operates only three locations.
 
 Management wants to analyze how efficient these theaters are, especially the relationship between movie rental costs and the revenue generated.
 
