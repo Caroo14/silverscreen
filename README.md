@@ -10,10 +10,10 @@ Management wants to analyze how efficient these theaters are, especially the rel
 
 My objective is to build a monthly performance table that combines:
 
-Movie details (title, genre, studio)
-Location information
-Rental costs
-Tickets sold
+Movie details (title, genre, studio),
+Location information,
+Rental costs,
+Tickets sold and 
 Revenue generated
 
 This table will allow management to better understand profitability per movie and per location.
